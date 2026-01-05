@@ -13,7 +13,7 @@ export const authRoutes = (app: Elysia) =>
         )
         .post(
             "/auth/login",
-            async ({ body, jwt, set }) => {
+            async ({ body, jwt, set }: any) => {
                 const { email, password } = body;
                 const user = await prisma.user.findUnique({
                     where: { email },
