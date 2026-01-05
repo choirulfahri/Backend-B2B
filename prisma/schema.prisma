@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  price       Decimal
+  stock       Int
+  image       String?
+  category    String?
+  sales       Int      @default(0) // Track total sales for "Top Products"
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  orderItems  OrderItem[]
+  packages    Package[]
+}
+
+model Order {
+  id           String      @id // Custom ID like #A7628JK
+  customerName String?
+  total        Decimal
+  status       String      @default("Pending") // Pending, Completed, Delivered
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  items        OrderItem[]
+}
+
+model OrderItem {
+  id        Int     @id @default(autoincrement())
+  orderId   String
+  productId Int
+  quantity  Int
+  price     Decimal // Snapshot price at time of order
+
+  order   Order   @relation(fields: [orderId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
+}
+
+model Lead {
+  id          Int      @id @default(autoincrement())
+  segment     String   // e.g. Travel Umroh, Hotel Chain
+  customer    String   // e.g. ESQ Tours, Santika
+  packageName String   // e.g. Paket Jamaah Basic
+  packageDesc String?  // e.g. Parfum non-alkohol mini
+  function    String?  // Kegunaan: Souvenir jamaah
+  status      String   // Prospect, Contacted, Qualified, Negotiation
+  picName     String?  // PIC Name: Head Procurement
+  email       String?
+  phone       String?
+  lastContact DateTime? @default(now())
+  nextAction  String?  // Kirim compare, Follow up
+  stageDetails String? // JSON string for stage-specific data
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Package {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  price       Float    @default(0)
+  createdAt   DateTime @default(now())
+  products    Product[]
+}

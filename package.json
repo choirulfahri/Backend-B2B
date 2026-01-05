@@ -1,0 +1,25 @@
+{
+  "name": "server",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "postinstall": "prisma generate"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "prisma": "5.22.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@elysiajs/cors": "^1.4.1",
+    "@elysiajs/swagger": "^1.3.1",
+    "@libsql/client": "^0.15.15",
+    "@prisma/adapter-libsql": "5.22.0",
+    "@prisma/client": "5.22.0",
+    "elysia": "^1.4.21",
+    "mysql2": "^3.16.0"
+  }
+}
