@@ -1,0 +1,7 @@
+{
+    "buildCommand": "bun install && bunx prisma generate",
+    "devCommand": "bun run --hot src/index.ts",
+    "installCommand": "bun install",
+    "framework": null,
+    "outputDirectory": "dist"
+}
