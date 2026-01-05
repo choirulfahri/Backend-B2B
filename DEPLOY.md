@@ -46,22 +46,22 @@ Berdasarkan screenshot yang Anda berikan, isi seperti ini:
 
 **Build Command:**
 ```
-bun install && bunx prisma generate
+npm install && npx prisma generate
 ```
 
 **Output Directory:**
-```
-dist
-```
+- Kosongkan atau hapus field ini (ElysiaJS tidak build ke folder output)
 
 **Install Command:**
 ```
-bun install
+npm install
 ```
 
-> ⚠️ **PENTING**: Vercel mungkin belum support Bun secara default. Jika error, gunakan npm/pnpm sebagai alternatif:
-> - Build Command: `npm install && npx prisma generate`
-> - Install Command: `npm install`
+> ⚠️ **PENTING**: Vercel saat ini **belum support Bun runtime secara native**. Gunakan **npm/Node.js** untuk build command.
+> 
+> Jika ingin tetap pakai Bun lokal, itu OK - tapi untuk Vercel deployment wajib pakai npm.
+> 
+> ElysiaJS kompatibel dengan Node.js, jadi tidak ada masalah!
 
 ---
 
