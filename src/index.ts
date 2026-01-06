@@ -6,15 +6,10 @@ import { dashboardRoutes } from "./routes/dashboard";
 
 const app = new Elysia()
   .use(cors({
-    origin: (request) => {
-      const origin = request.headers.get('origin');
-      // Allow localhost for development
-      if (origin?.includes('localhost')) return true;
-      // Allow Vercel deployments
-      if (origin?.includes('vercel.app')) return true;
-      return false;
-    },
-    credentials: true
+    origin: true, // Allow all origins temporarily for testing
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
   }))
   .use(swagger())
   .get("/", () => ({ message: "Hello from STIN Dashboard API!" }))
