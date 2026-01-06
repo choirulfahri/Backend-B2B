@@ -1,6 +1,6 @@
 import { Elysia, t } from "elysia";
 import { jwt } from "@elysiajs/jwt";
-import { compare } from "bcryptjs";
+import { hash, compare } from 'bcryptjs';
 import { prisma } from "../db";
 
 export const authRoutes = new Elysia()

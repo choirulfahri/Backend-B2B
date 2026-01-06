@@ -10,13 +10,11 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "types": [
-      "bun-types"
-    ]
+    "resolveJsonModule": true
   },
   "include": [
-    "**/*.ts"
+    "**/*.ts",
+    "src/types/**/*.d.ts"
   ],
   "exclude": [
     "node_modules"
