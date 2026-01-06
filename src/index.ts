@@ -5,7 +5,17 @@ import { authRoutes } from "./routes/auth";
 import { dashboardRoutes } from "./routes/dashboard";
 
 const app = new Elysia()
-  .use(cors())
+  .use(cors({
+    origin: (request) => {
+      const origin = request.headers.get('origin');
+      // Allow localhost for development
+      if (origin?.includes('localhost')) return true;
+      // Allow Vercel deployments
+      if (origin?.includes('vercel.app')) return true;
+      return false;
+    },
+    credentials: true
+  }))
   .use(swagger())
   .get("/", () => ({ message: "Hello from STIN Dashboard API!" }))
   .use(authRoutes)
